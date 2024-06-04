@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文本匿名化系统</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        .container {
+            flex: 1;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .description {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        .card-content {
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>文本匿名化系统</h1>
+    </header>
+    <div class="container">
+        <div class="description">
+            <p>请选择您要执行的操作：</p>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="location.href='/pii'">
+                <div class="card-icon">&#128100;</div>
+                <div class="card-content">
+                    <p>个人身份信息识别</p>
+                    <p>识别并标记文本中的个人身份信息。</p>
+                </div>
+                <button>选择</button>
+            </div>
+            <div class="card" onclick="location.href='/pse'">
+                <div class="card-icon">&#128273;</div>
+                <div class="card-content">
+                    <p>假名化</p>
+                    <p>将文本中的个人信息替换为假名。</p>
+                </div>
+                <button>选择</button>
+            </div>
+            <div class="card" onclick="location.href='/batch'">
+                <div class="card-icon">&#128196;</div>
+                <div class="card-content">
+                    <p>批量数据识别</p>
+                    <p>批量处理文件中的个人身份信息。</p>
+                </div>
+                <button>选择</button>
+            </div>
+            <div class="card" onclick="location.href='/config'">
+                <div class="card-icon">&#9881;</div>
+                <div class="card-content">
+                    <p>配置轮换字典</p>
+                    <p>配置用于假名化的轮换字典。</p>
+                </div>
+                <button>选择</button>
+            </div>
+            <div class="card" onclick="location.href='/piifl'">
+                <div class="card-icon">&#128065;</div>
+                <div class="card-content">
+                    <p>查看flair和spacy的识别效果</p>
+                    <p>查看使用Flair和Spacy识别个人身份信息的效果</p>
+                </div>
+                <button>选择</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 南开大学</p>
+    </footer>
+</body>
+</html>

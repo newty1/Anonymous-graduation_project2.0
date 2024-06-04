@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>一种文本匿名化方法</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin: 0;
+        }
+        form {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .form-group > div {
+            flex: 1;
+            min-width: 200px;
+            margin: 5px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        select, textarea, input[type="text"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            height: 17px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            white-space: pre-wrap;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fafafa;
+            height: 200px;
+            overflow-y: auto;
+        }
+        .output-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+        .output-container > div {
+            flex: 1;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>一种文本匿名化方法</h1>
+    <form method="post">
+        <div class="form-group">
+            <div>
+                <label for="dropdown1">选择个人信息识别模块方法：</label>
+                <select id="dropdown1" name="dropdown1">
+                    <option value="bert" {{ 'selected' if dropdown1_value == 'bert' else '' }}>bert</option>
+                    <option value="Roberta" {{ 'selected' if dropdown1_value == 'Roberta' else '' }}>Roberta</option>
+                    <option value="longformer" {{ 'selected' if dropdown1_value == 'longformer' else '' }}>longformer</option>
+                    <option value="flair" {{ 'selected' if dropdown1_value == 'flair' else '' }}>flair</option>
+                     <option value="spacy" {{ 'selected' if dropdown1_value == 'spacy' else '' }}>spacy</option>
+                </select>
+            </div>
+            <div>
+                <label for="dropdown2">选择假名化方法：</label>
+                <select id="dropdown2" name="dropdown2">
+                    <option value="faker库" {{ 'selected' if dropdown2_value == 'faker库' else '' }}>faker库</option>
+                    <option value="轮换方法" {{ 'selected' if dropdown2_value == '轮换方法' else '' }}>轮换方法</option>
+                     <option value="直接填充" {{ 'selected' if dropdown2_value == '直接填充' else '' }}>直接填充</option>
+                </select>
+            </div>
+            <div>
+                <label for="extra_input_text">轮换方法的字典：</label>
+                <textarea id="extra_input_text" name="extra_input_text" spellcheck="false">{{ extra_input_text }}</textarea>
+            </div>
+        </div>
+        <button type="submit">提交</button>
+        <label for="input_text">输入文本：</label>
+        <textarea id="input_text" name="input_text" spellcheck="false">{{ input_text }}</textarea>
+    </form>
+
+    <div class="output-container">
+        <div>
+            <label for="output_text1">文本进行个人身份实体识别：</label>
+            <div id="output_text1" class="output">{{ output_text1 }}</div>
+        </div>
+        <div>
+            <label for="output_text2">文本进行假名化：</label>
+            <div id="output_text2" class="output">{{ output_text2 }}</div>
+        </div>
+    </div>
+</body>
+</html>

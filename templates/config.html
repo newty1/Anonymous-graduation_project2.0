@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>配置轮换字典</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f5f5, #e0f7fa);
+            color: #333;
+        }
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 20px 0 10px;
+        }
+        input[type="file"], button, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            white-space: pre-wrap;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fafafa;
+            height: 200px;
+            overflow-y: auto;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const response = await fetch('/config', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert(data.message);
+            } else {
+                alert('配置失败，请重试。');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">配置轮换字典</div>
+        <nav>
+            <a href="/">首页</a>
+            <a href="/pii">个人身份信息识别</a>
+            <a href="/pse">假名化</a>
+            <a href="/batch">批量数据识别</a>
+            <a href="/config">配置轮换字典</a>
+            <a href="/piifl">查看Flair和Spacy效果</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>配置轮换字典</h1>
+        <form id="configForm" onsubmit="handleSubmit(event)">
+            <label for="file_input">上传配置文件：</label>
+            <input type="file" id="file_input" name="file_input" accept=".txt">
+            <label for="pii_module">选择个人身份信息识别模块方法：</label>
+            <select id="pii_module" name="pii_module">
+                <option value="bert">BERT</option>
+                <option value="longformer">Longformer</option>
+                <option value="roberta">RoBERTa</option>
+            </select>
+            
+            <label for="dictionary_size">选择轮换字典的大小：</label>
+            <select id="dictionary_size" name="dictionary_size">
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="300">300</option>
+                <option value="1000">1000</option>
+            </select>
+
+            <button type="submit">提交</button>
+        </form>
+
+        <form action="/pse" method="get">
+            <button type="submit">返回到假名化页面</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 南开大学</p>
+    </footer>
+</body>
+</html>
